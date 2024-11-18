@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="premières méthodes classe medecin, serviceMedical et Creatures">
+    <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="  classe Maladie.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/maladies/Maladie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/maladies/Maladie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/CentreQuarantaine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/CentreQuarantaine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/Crypte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/Crypte.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +83,7 @@
       <updated>1731686688722</updated>
       <workItem from="1731686689794" duration="31000" />
       <workItem from="1731686725305" duration="1017000" />
-      <workItem from="1731914721703" duration="5206000" />
+      <workItem from="1731914721703" duration="7652000" />
     </task>
     <task id="LOCAL-00001" summary="Base architecture">
       <option name="closed" value="true" />
@@ -100,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731922808757</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="  classe Maladie.java">
+      <option name="closed" value="true" />
+      <created>1731924430727</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731924430727</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +118,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base architecture" />
     <MESSAGE value="premières méthodes classe medecin, serviceMedical et Creatures" />
-    <option name="LAST_COMMIT_MESSAGE" value="premières méthodes classe medecin, serviceMedical et Creatures" />
+    <MESSAGE value="  classe Maladie.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="  classe Maladie.java" />
   </component>
 </project>
