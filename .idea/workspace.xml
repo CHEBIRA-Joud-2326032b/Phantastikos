@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Phantastikos.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Creature.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Elfe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/HommeBete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Lycanthrope.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Nain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Orque.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Reptilien.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Vampire.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/creatures/Zombie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/maladies/Maladie.java" afterDir="false" />
+    <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="Base architecture">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Creature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/medecins/Medecin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/medecins/Medecin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/services/ServiceMedical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ServiceMedical.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,25 +35,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/amuhome/c23002458/IdeaProjects/Phantastikos/src/Main.java&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/maximedouchy/Documents/GitHub/Phantastikos",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/amuhome/c23002458/IdeaProjects/Phantastikos/src/Main.java",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -79,11 +71,25 @@
       <option name="presentableId" value="Default" />
       <updated>1731686688722</updated>
       <workItem from="1731686689794" duration="31000" />
-      <workItem from="1731686725305" duration="632000" />
+      <workItem from="1731686725305" duration="1017000" />
+      <workItem from="1731914721703" duration="3626000" />
     </task>
+    <task id="LOCAL-00001" summary="Base architecture">
+      <option name="closed" value="true" />
+      <created>1731687457803</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731687457803</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Base architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Base architecture" />
   </component>
 </project>
