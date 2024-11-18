@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="Base architecture">
+    <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="premières méthodes classe medecin, serviceMedical et Creatures">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/creatures/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Creature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/medecins/Medecin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/medecins/Medecin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/ServiceMedical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ServiceMedical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/maladies/Maladie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/maladies/Maladie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "DOUCHY-Maxime-2326038u"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/CHEBIRA-Joud-2326032b/Phantastikos.git",
+    "accountId": "446c1a19-1771-4707-83de-ece3bbeaf9b9"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -72,7 +82,7 @@
       <updated>1731686688722</updated>
       <workItem from="1731686689794" duration="31000" />
       <workItem from="1731686725305" duration="1017000" />
-      <workItem from="1731914721703" duration="3626000" />
+      <workItem from="1731914721703" duration="5206000" />
     </task>
     <task id="LOCAL-00001" summary="Base architecture">
       <option name="closed" value="true" />
@@ -82,7 +92,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731687457803</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="premières méthodes classe medecin, serviceMedical et Creatures">
+      <option name="closed" value="true" />
+      <created>1731922808757</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731922808757</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,6 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base architecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="Base architecture" />
+    <MESSAGE value="premières méthodes classe medecin, serviceMedical et Creatures" />
+    <option name="LAST_COMMIT_MESSAGE" value="premières méthodes classe medecin, serviceMedical et Creatures" />
   </component>
 </project>
