@@ -5,10 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a97ae967-5c8d-4e93-bbd0-8589ac59e55b" name="Changes" comment="Base architecture">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/creatures/categories/ActionsCreature.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/creatures/categories/Contaminant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/creatures/categories/Demoralisant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/creatures/categories/Regenerant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/creatures/categories/Triage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/creatures/categories/Vip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/CreatureTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/creatures/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Creature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/medecins/Medecin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/medecins/Medecin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/ServiceMedical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ServiceMedical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Elfe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Elfe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/HommeBete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/HommeBete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Lycanthrope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Lycanthrope.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Nain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Nain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Orque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Orque.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Reptilien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Reptilien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Vampire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Vampire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/creatures/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/creatures/Zombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/MaladieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/MaladieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +35,7 @@
       <list>
         <option value="package-info" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -42,6 +58,7 @@
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/maximedouchy/Documents/GitHub/Phantastikos",

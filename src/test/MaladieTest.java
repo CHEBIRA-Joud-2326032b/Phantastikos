@@ -4,13 +4,13 @@ import main.maladies.Maladie;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MaladieTest {
+public class MaladieTest {
 
     @Test
     void augmenterNiveauTest() {
         //Maladie pec = new Maladie("Porphyrie érythropoïétique congénitale", "PEC", 2, 5);
         //pec.augmenterNiveau();
-        //assertEquals(3, grippe.getNiveauActuel());
+        //assertEquals(3, pec.getNiveauActuel());
     }
 
     @Test
