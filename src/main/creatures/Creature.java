@@ -1,6 +1,7 @@
 package main.creatures;
 
 import main.maladies.Maladie;
+import main.services.ServiceMedical;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,15 @@ public class Creature {
     private int age;
     private int moral;
     private List<Maladie> maladies;
+    private ServiceMedical residence;
+
+    public ServiceMedical getResidence() {
+        return residence;
+    }
+
+    public void setResidence(ServiceMedical residence) {
+        this.residence = residence;
+    }
 
     public Creature(String nom, char sexe, double poids, double taille, int age) {
         this.nom = nom;

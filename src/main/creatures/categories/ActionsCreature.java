@@ -1,10 +1,12 @@
 package main.creatures.categories;
 
+import main.creatures.Creature;
 import main.maladies.Maladie;
 
 public interface ActionsCreature {
     default void attendre(){
-        int prout;
+        Creature creature = (Creature) this;
+        creature.setMoral(creature.getMoral()-10);
     };
     void hurler();
     void sEmporter();
