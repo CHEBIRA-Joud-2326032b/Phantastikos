@@ -1,4 +1,4 @@
 package org.example.creatures.categories;
 
-public interface Regenerant {
+public interface Regenerant extends ActionsCreature{
 }

@@ -12,28 +12,4 @@ public class Elfe extends Creature implements Vip {
     }
 
 
-    @Override
-    public void hurler() {
-
-    }
-
-    @Override
-    public void sEmporter() {
-
-    }
-
-    @Override
-    public void tomberMalade(Maladie maladie) {
-
-    }
-
-    @Override
-    public boolean etreSoignee() {
-        return false;
-    }
-
-    @Override
-    public boolean trepasser() {
-        return false;
-    }
 }

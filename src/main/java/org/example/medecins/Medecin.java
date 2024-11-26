@@ -32,7 +32,7 @@ public class Medecin {
     }
 
     public void transfererCreature(ServiceMedical ancien, Creature creature, ServiceMedical nouveau) {
-        ancien.removeCreature(creature);
-        nouveau.addCreature(creature);
+        ancien.enleverCreature(creature);
+        nouveau.ajouterCreature(creature);
     }
 }

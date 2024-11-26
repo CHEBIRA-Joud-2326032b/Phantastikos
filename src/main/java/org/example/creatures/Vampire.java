@@ -15,28 +15,4 @@ public class Vampire extends Creature implements Vip, Demoralisant, Contaminant,
     }
 
 
-    @Override
-    public void hurler() {
-
-    }
-
-    @Override
-    public void sEmporter() {
-
-    }
-
-    @Override
-    public void tomberMalade(Maladie maladie) {
-
-    }
-
-    @Override
-    public boolean etreSoignee() {
-        return false;
-    }
-
-    @Override
-    public boolean trepasser() {
-        return false;
-    }
 }

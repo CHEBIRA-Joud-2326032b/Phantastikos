@@ -1,4 +1,4 @@
 package org.example.creatures.categories;
 
-public interface Demoralisant {
+public interface Demoralisant extends ActionsCreature{
 }

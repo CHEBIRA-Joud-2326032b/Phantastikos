@@ -33,12 +33,14 @@ public class ServiceMedical {
         return creatures;
     }
 
-    public void addCreature(Creature creature) {
+    public void ajouterCreature(Creature creature) {
         creatures.add(creature);
+        creature.setResidence(this);
     }
 
-    public void removeCreature(Creature creature) {
+    public void enleverCreature(Creature creature) {
         creatures.remove(creature);
+        creature.setResidence(null);
     }
 
     public void afficherDetails() {
