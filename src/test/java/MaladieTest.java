@@ -1,5 +1,5 @@
-import org.example.maladies.Maladie;
-import org.example.maladies.TypeMaladie;
+import org.phantastikos.entite.etats.maladies.Maladie;
+import org.phantastikos.entite.etats.maladies.TypeMaladie;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

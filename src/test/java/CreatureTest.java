@@ -1,10 +1,10 @@
-import org.example.creatures.*;
-import org.example.maladies.Maladie;
-import org.example.maladies.TypeMaladie;
-import org.example.services.ServiceMedical;
+import org.phantastikos.entite.creatures.Elfe;
+import org.phantastikos.entite.creatures.HommeBete;
+import org.phantastikos.entite.etats.maladies.Maladie;
+import org.phantastikos.entite.etats.maladies.TypeMaladie;
+import org.phantastikos.structures.hopital.services.Budget;
+import org.phantastikos.structures.hopital.services.ServiceMedical;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +12,7 @@ public class CreatureTest {
 
     @Test
     void attendreTest() {
-        ServiceMedical residence = new ServiceMedical("HPP", 500);
+        ServiceMedical residence = new ServiceMedical("HPP",1000,70, Budget.INEXISTANT);
         HommeBete hommeBete = new HommeBete("Prout", 'Z', 78, 187, 256);
         residence.ajouterCreature(hommeBete);
         hommeBete.attendre();
@@ -21,7 +21,7 @@ public class CreatureTest {
 
     @Test
     void hurlerTest() {
-        ServiceMedical residence = new ServiceMedical("HPP", 500);
+        ServiceMedical residence = new ServiceMedical("HPP",800,50, Budget.INEXISTANT);
         HommeBete hommeBete = new HommeBete("Prout", 'Z', 78, 187, 256);
         residence.ajouterCreature(hommeBete);
         hommeBete.setMoral(0);
@@ -72,7 +72,7 @@ public class CreatureTest {
 
     @Test
     void contaminerTest() {
-        ServiceMedical residence = new ServiceMedical("HPP", 500);
+        ServiceMedical residence = new ServiceMedical("HPP",1800,250, Budget.FAIBLE);
         HommeBete infecteur = new HommeBete("Infecteur", 'M', 80, 180, 30);
         HommeBete cible = new HommeBete("Cible", 'F', 70, 170, 40);
 
@@ -99,7 +99,7 @@ public class CreatureTest {
 
     @Test
     void triageAttendreTest() {
-        ServiceMedical residence = new ServiceMedical("HPP", 500);
+        ServiceMedical residence = new ServiceMedical("HPP",600,70, Budget.MEDIOCRE);
         HommeBete hommeBete1 = new HommeBete("Solitaire", 'M', 60, 170, 50);
         HommeBete hommeBete2 = new HommeBete("Ami", 'F', 70, 180, 60);
 
