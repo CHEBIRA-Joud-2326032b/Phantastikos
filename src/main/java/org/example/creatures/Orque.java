@@ -10,5 +10,7 @@ public class Orque extends Creature implements Triage {
         super(nom, sexe, poids, taille, age);
         setMoral(60);
     }
-
+    public boolean isContagieuse() {
+        return true; 
+    }
 }

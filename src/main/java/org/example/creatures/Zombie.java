@@ -11,5 +11,8 @@ public class Zombie extends Creature implements Triage {
         super(nom, sexe, poids, taille, age);
         setMoral(10);
     }
+    public boolean isRegenerante() {
+        return true;
+    }
 
 }

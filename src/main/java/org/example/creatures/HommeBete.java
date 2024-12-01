@@ -10,6 +10,8 @@ public class HommeBete extends Creature implements Triage {
         super(nom, sexe, poids, taille, age);
         setMoral(80);
     }
-
+    public boolean isContagieuse() {
+        return true;
+    }
 
 }

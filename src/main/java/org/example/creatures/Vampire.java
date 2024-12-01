@@ -13,6 +13,10 @@ public class Vampire extends Creature implements Vip, Demoralisant, Contaminant,
         super(nom, sexe, poids, taille, age);
         setMoral(100);
     }
-
-
+    public boolean isContagieuse() {
+        return true;
+    }
+    public boolean isRegenerante() {
+        return true;
+    }
 }

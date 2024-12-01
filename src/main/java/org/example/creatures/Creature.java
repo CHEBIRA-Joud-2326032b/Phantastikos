@@ -127,4 +127,12 @@ public class Creature implements ActionsCreature {
     public void setNbrAttente(int nbrAttente) {
         this.nbrAttente = nbrAttente;
     }
+
+    public boolean isRegenerante() {
+        return false;
+    }
+
+    public boolean isContagieuse() {
+        return false;
+    }
 }
