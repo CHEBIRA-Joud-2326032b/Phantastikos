@@ -4,13 +4,9 @@ public class Hurlement {
     private TypeHurlement type;
     private Lycanthrope emetteur;
 
-    public Hurlement(Lycanthrope emetteur, TypeHurlement type, Lycanthrope cible) {
+    public Hurlement(Lycanthrope emetteur, TypeHurlement type) {
         this.emetteur = emetteur;
         this.type = type;
-    }
-
-    public Hurlement(Lycanthrope emetteur, TypeHurlement type) {
-        this(emetteur, type, null);
     }
 
     public void emettre() {
@@ -41,15 +37,25 @@ public class Hurlement {
 
         for (Meute autre : emetteur.getMeute().getColonie().getMeutes()) {
             if (!autre.equals(emetteur.getMeute())) {
-                return "L'autre meute répond avec son propre hurlement.";
+                return "La meute"+ autre.getNom() +"répond avec son propre hurlement.";
             }
         }
         return "Silence...";
     }
 
     private void hurlementDomination() {
-
-
+        for (Meute meute : emetteur.getMeute().getColonie().getMeutes()) {
+            for (Lycanthrope membre : meute.getMembres()) {
+                if (!membre.equals(emetteur)) {
+                    if (emetteur.getRang() == 'ω' || emetteur.getRang() < membre.getRang()){
+                        membre.emettreHurlement(TypeHurlement.AGRESSIVITE);
+                    }
+                    else {
+                        membre.emettreHurlement(TypeHurlement.SOUMISSION);
+                    }
+                }
+            }
+        }
     }
 
     private String hurlementSoumission() {

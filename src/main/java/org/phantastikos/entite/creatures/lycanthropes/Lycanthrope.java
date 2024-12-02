@@ -184,7 +184,7 @@ public class Lycanthrope extends Creature implements Triage {
     }
 
     public void emettreHurlement(TypeHurlement typeHurlement) {
-        new Hurlement(this, typeHurlement);
+        new Hurlement(this, typeHurlement).emettre();
     }
 
 }
