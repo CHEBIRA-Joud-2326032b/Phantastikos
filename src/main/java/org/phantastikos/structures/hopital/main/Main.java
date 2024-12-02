@@ -16,6 +16,8 @@ public class Main {
     private String nomHopital;
     private List<Medecin> listeMedecins;
     private List<Creature> listePatients;
+     private List<ServiceMedical> listeServices;
+
     private int compteurTour;
 
     // Constructeur
@@ -23,6 +25,7 @@ public class Main {
         this.nomHopital = nomHopital;
         this.listeMedecins = new ArrayList<>();
         this.listePatients = new ArrayList<>();
+        this.listeServices = new ArrayList<>();
         this.compteurTour = 0;
     }
 
@@ -35,12 +38,12 @@ public class Main {
         listeMedecins.remove(medecin);
     }
 
-    public void ajouterPatient(Creature patient) {
-        listePatients.add(patient);
+    public void ajouterService(ServiceMedical Service) {
+        listeServices.add(Service);
     }
 
-    public void retirerPatient(Creature patient) {
-        listePatients.remove(patient);
+    public void retirerService(ServiceMedical Service) {
+        listeServices.remove(Service);
     }
 
 
@@ -64,6 +67,7 @@ public class Main {
 
         // Ajout des entités à l'hôpital
         hopital.ajouterMedecin(medecin1);
+        hopital.ajouterService(endroitDesBG);
         endroitDesBG.ajouterCreature(loupGarou);
         endroitDesBG.ajouterCreature(vampire);
 
@@ -92,7 +96,7 @@ public class Main {
                     System.out.println("Nom du nouveau patient :");
                     String nomPatient = scanner.nextLine();
                     Creature patient = new Creature(nomPatient, 'F', 60.0, 1.7, 25);
-                    hopital.ajouterPatient(patient);
+                    //hopital.ajouterPatient(patient);
                     actionsRestantes--;
                     break;
 
@@ -128,38 +132,38 @@ public class Main {
                     System.out.println("Médecin choisi : " + medecinChoisi.getNom());
 
                     // Afficher les patients disponibles
-                    if (hopital.listePatients.isEmpty()) {
+                    if (hopital.listeServices.isEmpty()) {
                         System.out.println("Aucun patient à soigner !");
                         break;
                     }
 
-                    System.out.println("Patients disponibles :");
-                    for (int i = 0; i < hopital.listePatients.size(); i++) {
-                        Creature allPatient = hopital.listePatients.get(i);
-                        System.out.println((i + 1) + " - " + allPatient.getNom());
+                    System.out.println("Services disponibles :");
+                    for (int i = 0; i < hopital.listeServices.size(); i++) {
+                        ServiceMedical allService = hopital.listeServices.get(i);
+                        System.out.println((i + 1) + " - " + allService.getNom());
                     }
 
                     // Demander à l'utilisateur de choisir un patient
-                    System.out.println("Entrez le numéro du patient à soigner :");
-                    int choixPatient;
+                    System.out.println("Entrez le numéro du Services à soigner :");
+                    int choixService;
                     try {
-                        choixPatient = Integer.parseInt(scanner.nextLine()) - 1;
+                        choixService = Integer.parseInt(scanner.nextLine()) - 1;
                     } catch (NumberFormatException e) {
                         System.out.println("Entrée invalide. Veuillez entrer un numéro.");
                         break;
                     }
 
-                    if (choixPatient < 0 || choixPatient >= hopital.listePatients.size()) {
-                        System.out.println("Patient introuvable !");
+                    if (choixService < 0 || choixService >= hopital.listeServices.size()) {
+                        System.out.println("Service introuvable !");
                         break;
                     }
 
-                    Creature patientChoisi = hopital.listePatients.get(choixPatient);
-                    System.out.println("Patient choisi : " + patientChoisi.getNom());
+                    ServiceMedical ServicesChoisi = hopital.listeServices.get(choixService);
+                    System.out.println("Service choisi : " + ServicesChoisi.getNom());
 
                     // Soigner le patient
                     medecinChoisi.soigner(endroitDesBG);
-                    System.out.println(patientChoisi.getNom() + " a été soigné par " + medecinChoisi.getNom() + " !");
+                    System.out.println(ServicesChoisi.getNom() + " a été soigné par " + medecinChoisi.getNom() + " !");
                     actionsRestantes--;
                     break;
 
