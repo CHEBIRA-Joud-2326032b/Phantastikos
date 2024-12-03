@@ -49,4 +49,8 @@ public class Maladie {
     public String toString() {
         return getNomComplet() + " (" + getNomAbrege() + "), Niveau : " + niveauActuel + "/" + getNiveauMaximum();
     }
+
+    public String getTypeMaladie() {
+        return this.type.toString();
+    }
 }

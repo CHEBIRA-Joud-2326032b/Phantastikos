@@ -5,8 +5,8 @@ import org.phantastikos.entite.creatures.Creature;
 public class CentreQuarantaine extends ServiceMedical {
     private boolean isolation;
 
-    public CentreQuarantaine(String nom, double budget, boolean isolation) {
-        super(nom, budget);
+    public CentreQuarantaine(String nom, double superficie, int capaciteMax, Budget budget,boolean isolation) {
+        super(nom, superficie, capaciteMax, budget);
         this.isolation = isolation;
     }
 
@@ -26,14 +26,6 @@ public class CentreQuarantaine extends ServiceMedical {
         super.ajouterCreature(creature);
     }
 
-    public void reviserBudget(double budget) {
-        // Révision du budget en tenant compte de l'isolation
-        double budgetRevise = budget;
-        if (isolation) {
-            budgetRevise += 1000; // Exemple : coût fixe supplémentaire pour l'isolation
-        }
-        super.setBudget(budgetRevise);
-    }
 
     @Override
     public String afficherDetails() {

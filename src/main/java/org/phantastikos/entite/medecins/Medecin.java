@@ -2,6 +2,7 @@ package org.phantastikos.entite.medecins;
 
 
 import org.phantastikos.entite.creatures.Creature;
+import org.phantastikos.structures.hopital.services.Budget;
 import org.phantastikos.structures.hopital.services.ServiceMedical;
 
 public class Medecin {
@@ -25,7 +26,7 @@ public class Medecin {
         // Implémentation du soin
     }
 
-    public void reviserBudget(ServiceMedical service, double nouveauBudget) {
+    public void reviserBudget(ServiceMedical service, Budget nouveauBudget) {
         System.out.println(nom + " révise le budget du service : " + service.getNom());
         service.setBudget(nouveauBudget);
         System.out.println("Nouveau budget : " + service.getBudget());
@@ -34,5 +35,9 @@ public class Medecin {
     public void transfererCreature(ServiceMedical ancien, Creature creature, ServiceMedical nouveau) {
         ancien.enleverCreature(creature);
         nouveau.ajouterCreature(creature);
+    }
+
+    public String getNom() {
+        return nom;
     }
 }

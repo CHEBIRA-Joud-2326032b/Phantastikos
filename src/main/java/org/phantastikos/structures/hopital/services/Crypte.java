@@ -6,8 +6,8 @@ public class Crypte extends ServiceMedical {
     private int niveauVentilation;
     private double temperature;
 
-    public Crypte(String nom, double budget, int niveauVentilation, double temperature) {
-        super(nom, budget);
+    public Crypte(String nom, double superficie, int capaciteMax, Budget budget, int niveauVentilation, double temperature) {
+        super(nom, superficie, capaciteMax, budget);
         this.niveauVentilation = niveauVentilation;
         this.temperature = temperature;
     }
@@ -34,19 +34,6 @@ public class Crypte extends ServiceMedical {
             throw new IllegalArgumentException("Seules les créatures régénérantes peuvent être ajoutées à une crypte.");
         }
         super.ajouterCreature(creature);
-    }
-
-
-    public void reviserBudget(double budget) {
-        // Révision du budget en fonction de la ventilation et de la température
-        double budgetRevise = budget;
-        if (niveauVentilation < 5) {
-            budgetRevise -= 500; // Exemple : pénalité pour faible ventilation
-        }
-        if (temperature < 0 || temperature > 10) {
-            budgetRevise += 1000; // Exemple : coût supplémentaire pour température inadéquate
-        }
-        setBudget(budgetRevise);
     }
 
     @Override

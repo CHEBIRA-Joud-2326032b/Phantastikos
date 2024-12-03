@@ -38,11 +38,12 @@ public class ServiceMedical {
     }
 
     public void ajouterCreature(Creature creature) {
-        if (creatures.size() == capaciteMax) {
+        if (creatures.size() < capaciteMax) {
             creatures.add(creature);
             creature.setResidence(this);
+        } else {
+            System.out.println("Impossible d'ajouter la créature : capacité maximale atteinte !");
         }
-
     }
 
     public void enleverCreature(Creature creature) {
@@ -50,15 +51,14 @@ public class ServiceMedical {
         creature.setResidence(null);
     }
 
-    public void afficherDetails() {
-        System.out.println("Service Médical: " + nom);
-        System.out.println("Superficie: " + superficie + " m²");
-        System.out.println("Capacité maximale: " + capaciteMax);
-        System.out.println("Budget: " + budget);
-        System.out.println("Nombre de créatures présentes: " + creatures.size());
-        System.out.println("Liste des créatures:");
+    public String afficherDetails() {
+        StringBuilder details = new StringBuilder();
+        details.append("Service Médical : ").append(nom).append("\n");
+        details.append("Budget : ").append(budget).append("\n");
+        details.append("Liste des créatures :\n");
         for (Creature creature : creatures) {
-            System.out.println(creature);
+            details.append("- ").append(creature.getNom()).append("\n");
         }
+        return details.toString();
     }
 }
