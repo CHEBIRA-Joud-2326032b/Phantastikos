@@ -1,6 +1,8 @@
 package org.phantastikos.structures.hopital.main;
 
 import org.phantastikos.entite.creatures.Creature;
+import org.phantastikos.entite.etats.maladies.Maladie;
+import org.phantastikos.entite.etats.maladies.TypeMaladie;
 import org.phantastikos.structures.hopital.services.ServiceMedical;
 import org.phantastikos.vues.VueGenerale;
 import org.phantastikos.entite.medecins.Medecin;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.phantastikos.entite.etats.maladies.TypeMaladie.MDC;
 import static org.phantastikos.structures.hopital.services.Budget.*;
 
 public class Main {
@@ -53,6 +56,7 @@ public class Main {
         System.out.println("2 - Soigner un Service");
         System.out.println("3 - Réviser le budget");
         System.out.println("4 - Transferer une créature");
+        System.out.println("5 - examiner les créatures d'un service");
     }
 
 
@@ -67,6 +71,9 @@ public class Main {
 
         Creature loupGarou = new Creature("Loup-Garou Malade", 'M', 80.0, 1.90, 150);
         Creature vampire = new Creature("Vampire Fatigué", 'F', 65.0, 1.75, 200);
+
+        Maladie maladieZPL = new Maladie(TypeMaladie.ZPL);
+        loupGarou.ajouterMaladie(maladieZPL);
 
         // Ajout des entités à l'hôpital
         hopital.ajouterMedecin(medecin1);
@@ -86,7 +93,18 @@ public class Main {
             if (actionsRestantes == 0) {
                 // Fin du tour
                 System.out.println("Fin du tour. Mise à jour de l'état de l'hôpital...");
-                //hopital.mettreAJour();
+                for (ServiceMedical service : hopital.listeServices) {
+                    for (Creature creature : service.getCreatures()) {
+                        creature.attendre(); // La créature attend, son moral diminue
+                    }
+
+                    // Vérifiez les créatures qui s'emportent et gérez la contagion
+                    for (Creature creature : service.getCreatures()) {
+                        if (creature.estEmporte()) {
+                            creature.contaminer(service.getCreatures());
+                        }
+                    }
+                }
                 actionsRestantes = 5;
                 //vue.afficherEtatHopital(hopital);
             }
@@ -200,6 +218,8 @@ public class Main {
                     break;
                 case "3":
                     System.out.println("Choix 3");
+                    actionsRestantes--;
+                    System.out.println(actionsRestantes);
 
                     break;
 
@@ -285,6 +305,47 @@ public class Main {
                     serviceCible.ajouterCreature(creatureADeplacer);
                     System.out.println(creatureADeplacer.getNom() + " a été transféré de " + serviceSource.getNom() + " à " + serviceCible.getNom() + " !");
                     actionsRestantes--;
+                    break;
+                case "5":
+                    if (hopital.listeServices.isEmpty()) {
+                        System.out.println("Aucun Service !");
+                        break;
+                    }
+
+                    System.out.println("Services disponibles :");
+                    for (int i = 0; i < hopital.listeServices.size(); i++) {
+                        ServiceMedical allService = hopital.listeServices.get(i);
+                        System.out.println((i + 1) + " - " + allService.getNom());
+                    }
+
+                    System.out.println("Entrez le numéro du Services pour y examiner les créatures :");
+                    int choixCreaturesAffichage;
+                    try {
+                        choixCreaturesAffichage = Integer.parseInt(scanner.nextLine()) - 1;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrée invalide. Veuillez entrer un numéro.");
+                        break;
+                    }
+                    if (choixCreaturesAffichage < 0 || choixCreaturesAffichage >= hopital.listeServices.size()) {
+                        System.out.println("Service introuvable !");
+                        break;
+                    }
+
+                    ServiceMedical CreaturesChoisiAff = hopital.listeServices.get(choixCreaturesAffichage);
+                    System.out.println("Service choisi : " + CreaturesChoisiAff.getNom());
+                    List<Creature> creatures = CreaturesChoisiAff.getCreatures();
+
+                    if (creatures.isEmpty()) {
+                        System.out.println("Aucune créature dans ce service.");
+                    } else {
+                        System.out.println("Créatures et leurs maladies dans le service :");
+                        for (Creature creature : creatures) {
+                            System.out.println("- " + creature.getNom() + " :");
+                            for (Maladie maladie : creature.getMaladies()) {
+                                System.out.println("  * " + maladie);
+                            }
+                        }
+                    }
                     break;
 
 

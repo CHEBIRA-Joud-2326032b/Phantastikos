@@ -2,6 +2,7 @@ package org.phantastikos.entite.creatures;
 
 import org.phantastikos.entite.creatures.comportements.BaseComportements;
 import org.phantastikos.entite.etats.maladies.Maladie;
+import org.phantastikos.entite.etats.maladies.TypeMaladie;
 import org.phantastikos.structures.hopital.services.ServiceMedical;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class Creature implements BaseComportements {
         this.age = age;
         this.maladies = new ArrayList<>();
         this.cptHurlements = 0;
+        this.moral = 3;
+        this.nbrAttente = 0;
     }
 
 
@@ -89,6 +92,10 @@ public class Creature implements BaseComportements {
         this.maladies = maladies;
     }
 
+    public boolean possedeMaladie(Maladie maladie) {
+        return this.maladies.contains(maladie);
+    }
+
     public ServiceMedical getResidence() {
         return residence;
     }
@@ -134,5 +141,42 @@ public class Creature implements BaseComportements {
 
     public boolean isContagieuse() {
         return false;
+    }
+
+    public void attendre() {
+        nbrAttente++;
+        moral -= 1;
+        System.out.println(moral);
+        if (moral <= 0) {
+            hurler();
+        }
+    }
+
+    public void hurler() {
+        cptHurlements++;
+        moral = 0;
+        System.out.println(cptHurlements);
+        System.out.println(nom + " hurle !");
+    }
+
+    public boolean estEmporte() {
+        return cptHurlements >= 3;
+    }
+
+    public void contaminer(List<Creature> autresCreatures) {
+        if (!estEmporte()) return;
+
+        System.out.println(nom + " s'emporte et risque de contaminer d'autres créatures !");
+        for (Creature cible : autresCreatures) {
+            if (cible != this && Math.random() < 0.5) { // 50% de chances de contaminer
+                for (Maladie maladie : this.maladies) {
+                    if (!cible.possedeMaladie(maladie)) {
+                        cible.ajouterMaladie(maladie);
+                        System.out.println(this.nom + " a contaminé " + cible.getNom() + " avec " + maladie.getTypeMaladie());
+                        break;
+                        }
+                }
+            }
+        }
     }
 }
