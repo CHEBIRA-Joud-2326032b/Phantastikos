@@ -38,11 +38,12 @@ public class ServiceMedical {
     }
 
     public void ajouterCreature(Creature creature) {
-        if (creatures.size() == capaciteMax) {
+        if (creatures.size() < capaciteMax) {
             creatures.add(creature);
             creature.setResidence(this);
+        } else {
+            System.out.println("Impossible d'ajouter la créature : capacité maximale atteinte !");
         }
-
     }
 
     public void enleverCreature(Creature creature) {

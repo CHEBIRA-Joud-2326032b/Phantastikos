@@ -49,9 +49,10 @@ public class Main {
 
     public void afficherActionsPossibles() {
         System.out.println("Actions disponibles :");
-        System.out.println("1 - Ajouter un patient");
-        System.out.println("2 - Soigner un patient");
-        System.out.println("3 - Quitter le jeu");
+        System.out.println("1 - examiner un service médical");
+        System.out.println("2 - Soigner un Service");
+        System.out.println("3 - Réviser le budget");
+        System.out.println("4 - Transferer une créature");
     }
 
 
@@ -62,12 +63,15 @@ public class Main {
         // Création de médecins et de patients
         Medecin medecin1 = new Medecin("Dr. Prout", "M", 12);
         ServiceMedical endroitDesBG = new ServiceMedical("L'endroit des BG !", 4, 10, INEXISTANT);
+        ServiceMedical ServiceSud = new ServiceMedical("Service Sud", 7, 13, MEDIOCRE);
+
         Creature loupGarou = new Creature("Loup-Garou Malade", 'M', 80.0, 1.90, 150);
         Creature vampire = new Creature("Vampire Fatigué", 'F', 65.0, 1.75, 200);
 
         // Ajout des entités à l'hôpital
         hopital.ajouterMedecin(medecin1);
         hopital.ajouterService(endroitDesBG);
+        hopital.ajouterService(ServiceSud);
         endroitDesBG.ajouterCreature(loupGarou);
         endroitDesBG.ajouterCreature(vampire);
 
@@ -89,15 +93,44 @@ public class Main {
 
             // Afficher les actions possibles
             hopital.afficherActionsPossibles();
+
             String choix = scanner.nextLine();
 
+
+
             switch (choix) {
-                case "1": // Exemple : Ajouter un patient
-                    System.out.println("Nom du nouveau patient :");
-                    String nomPatient = scanner.nextLine();
-                    Creature patient = new Creature(nomPatient, 'F', 60.0, 1.7, 25);
-                    //hopital.ajouterPatient(patient);
-                    actionsRestantes--;
+                case "1":
+                    if (hopital.listeServices.isEmpty()) {
+                        System.out.println("Aucun Service !");
+                        break;
+                    }
+
+                    System.out.println("Services disponibles :");
+                    for (int i = 0; i < hopital.listeServices.size(); i++) {
+                        ServiceMedical allService = hopital.listeServices.get(i);
+                        System.out.println((i + 1) + " - " + allService.getNom());
+                    }
+
+                    System.out.println("Entrez le numéro du Services à examiner :");
+                    int choixServiceAffichage;
+                    try {
+                        choixServiceAffichage = Integer.parseInt(scanner.nextLine()) - 1;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrée invalide. Veuillez entrer un numéro.");
+                        break;
+                    }
+                    if (choixServiceAffichage < 0 || choixServiceAffichage >= hopital.listeServices.size()) {
+                        System.out.println("Service introuvable !");
+                        break;
+                    }
+
+                    ServiceMedical ServicesChoisiAff = hopital.listeServices.get(choixServiceAffichage);
+                    System.out.println("Service choisi : " + ServicesChoisiAff.getNom());
+
+                    // Afficher les detail, ca marche pas dans la console mais pas grave
+                    ServicesChoisiAff.toString();
+                    //Implementer si besoin "actionsRestantes--;" mais j'estime que c'est pas judicieux
+                    //que afficher un service coute une action.
                     break;
 
                 case "2": // Soigner un patient
@@ -131,9 +164,8 @@ public class Main {
                     Medecin medecinChoisi = hopital.listeMedecins.get(choixMedecin);
                     System.out.println("Médecin choisi : " + medecinChoisi.getNom());
 
-                    // Afficher les patients disponibles
                     if (hopital.listeServices.isEmpty()) {
-                        System.out.println("Aucun patient à soigner !");
+                        System.out.println("Aucun Service à soigner !");
                         break;
                     }
 
@@ -166,12 +198,95 @@ public class Main {
                     System.out.println(ServicesChoisi.getNom() + " a été soigné par " + medecinChoisi.getNom() + " !");
                     actionsRestantes--;
                     break;
+                case "3":
+                    System.out.println("Choix 3");
 
-
-                case "3": // Fin du jeu
-                    System.out.println("Merci d'avoir joué !");
-                    jeuEnCours = false;
                     break;
+
+                case "4": // Transférer une créature d'un service à un autre
+                    if (hopital.listeServices.size() < 2) {
+                        System.out.println("Impossible de transférer : il doit y avoir au moins deux services !");
+                        break;
+                    }
+
+                    // Étape 1 : Sélectionner le service source
+                    System.out.println("Services disponibles pour le transfert :");
+                    for (int i = 0; i < hopital.listeServices.size(); i++) {
+                        System.out.println((i + 1) + " - " + hopital.listeServices.get(i).getNom());
+                    }
+                    System.out.println("Entrez le numéro du service source :");
+                    int choixServiceSource;
+                    try {
+                        choixServiceSource = Integer.parseInt(scanner.nextLine()) - 1;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrée invalide. Veuillez entrer un numéro.");
+                        break;
+                    }
+
+                    if (choixServiceSource < 0 || choixServiceSource >= hopital.listeServices.size()) {
+                        System.out.println("Service introuvable !");
+                        break;
+                    }
+
+                    ServiceMedical serviceSource = hopital.listeServices.get(choixServiceSource);
+
+                    if (serviceSource.getCreatures().isEmpty()) {
+                        System.out.println("Ce service ne contient aucune créature !");
+                        break;
+                    }
+
+                    // Étape 2 : Sélectionner la créature à transférer
+                    System.out.println("Créatures disponibles dans " + serviceSource.getNom() + " :");
+                    List<Creature> creaturesSource = serviceSource.getCreatures();
+                    for (int i = 0; i < creaturesSource.size(); i++) {
+                        System.out.println((i + 1) + " - " + creaturesSource.get(i).getNom());
+                    }
+                    System.out.println("Entrez le numéro de la créature à transférer :");
+                    int choixCreature;
+                    try {
+                        choixCreature = Integer.parseInt(scanner.nextLine()) - 1;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrée invalide. Veuillez entrer un numéro.");
+                        break;
+                    }
+
+                    if (choixCreature < 0 || choixCreature >= creaturesSource.size()) {
+                        System.out.println("Créature introuvable !");
+                        break;
+                    }
+
+                    Creature creatureADeplacer = creaturesSource.get(choixCreature);
+
+                    // Étape 3 : Sélectionner le service cible
+                    System.out.println("Services disponibles pour recevoir " + creatureADeplacer.getNom() + " :");
+                    for (int i = 0; i < hopital.listeServices.size(); i++) {
+                        if (i != choixServiceSource) {
+                            System.out.println((i + 1) + " - " + hopital.listeServices.get(i).getNom());
+                        }
+                    }
+                    System.out.println("Entrez le numéro du service cible :");
+                    int choixServiceCible;
+                    try {
+                        choixServiceCible = Integer.parseInt(scanner.nextLine()) - 1;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrée invalide. Veuillez entrer un numéro.");
+                        break;
+                    }
+
+                    if (choixServiceCible < 0 || choixServiceCible >= hopital.listeServices.size() || choixServiceCible == choixServiceSource) {
+                        System.out.println("Service cible invalide !");
+                        break;
+                    }
+
+                    ServiceMedical serviceCible = hopital.listeServices.get(choixServiceCible);
+
+                    // Étape 4 : Transférer la créature
+                    serviceSource.enleverCreature(creatureADeplacer);
+                    serviceCible.ajouterCreature(creatureADeplacer);
+                    System.out.println(creatureADeplacer.getNom() + " a été transféré de " + serviceSource.getNom() + " à " + serviceCible.getNom() + " !");
+                    actionsRestantes--;
+                    break;
+
 
                 default:
                     System.out.println("Choix invalide. Essayez encore.");
