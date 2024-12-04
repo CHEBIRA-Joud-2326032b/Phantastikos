@@ -7,17 +7,18 @@ public class HurlementDomination implements HurlementStrategie{
 
     @Override
     public String emettre(Lycanthrope emetteur) {
+        StringBuilder resultat = new StringBuilder(emetteur.getNom() + " exprime sa domination." + "\n");
         for (Meute meute : emetteur.getMeute().getColonie().getMeutes()) {
             for (Lycanthrope membre : meute.getMembres()) {
                 if (!membre.equals(emetteur)) {
-                    if (emetteur.getRang() == 'ω' || emetteur.getRang() < membre.getRang()) {
-                        membre.emettreHurlement(new HurlementAgressivite());
+                    if (emetteur.getRang() == 'ω' || emetteur.getRang() <= membre.getRang()) {
+                        resultat.append(membre.emettreHurlement(new HurlementAgressivite()));
                     } else {
-                        membre.emettreHurlement(new HurlementSoumission());
+                        resultat.append(membre.emettreHurlement(new HurlementSoumission()));
                     }
                 }
             }
         }
-        return emetteur.getNom() + " exprime sa domination.";
+        return resultat.toString();
     }
 }

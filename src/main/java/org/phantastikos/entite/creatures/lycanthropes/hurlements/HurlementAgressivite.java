@@ -6,6 +6,6 @@ public class HurlementAgressivite implements HurlementStrategie{
 
     @Override
     public String emettre(Lycanthrope emetteur) {
-        return emetteur.getNom() + " exprime son agressivité !";
+        return emetteur.getNom() + " exprime son agressivité !\n";
     }
 }

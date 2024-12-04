@@ -2,7 +2,7 @@ package org.phantastikos.structures.hopital.services;
 
 import org.phantastikos.entite.creatures.Creature;
 
-public class Crypte extends ServiceMedical {
+public class Crypte extends ServiceMedicalSpecifique {
     private int niveauVentilation;
     private double temperature;
 
@@ -29,13 +29,23 @@ public class Crypte extends ServiceMedical {
     }
 
     @Override
-    public void ajouterCreature(Creature creature) {
-        if (!creature.isRegenerante()) {
-            throw new IllegalArgumentException("Seules les créatures régénérantes peuvent être ajoutées à une crypte.");
-        }
-        super.ajouterCreature(creature);
+    public boolean accepterCreature(Creature creature) {
+        return creature.isRegenerante();
     }
 
+    @Override
+    public void reviserBudget() {
+        if (getCreatures().size() >= getCapaciteMax()-10) {
+            setBudget(getBudget()-50);
+        }
+        if(niveauVentilation <= 2) {
+            setBudget(getBudget()-25);
+        }
+        if (temperature > 20.0) {
+            setBudget(getBudget()-25);
+        }
+        setCatBudget(Budget.CategoriserBudget(getBudget()));
+    }
     @Override
     public String afficherDetails() {
         StringBuilder details = new StringBuilder(super.afficherDetails());

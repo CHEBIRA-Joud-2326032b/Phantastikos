@@ -6,6 +6,20 @@ public enum Budget {
     INSUFFISANT,
     FAIBLE;
 
+    public static Budget CategoriserBudget(int budget){
+        if (budget < 200){
+            return INEXISTANT;
+        }
+        else if (budget < 400){
+            return MEDIOCRE;
+        }
+        else if (budget < 600){
+            return INSUFFISANT;
+        }
+        else {
+            return FAIBLE;
+        }
+    }
     @Override
     public String toString() {
         switch (this) {

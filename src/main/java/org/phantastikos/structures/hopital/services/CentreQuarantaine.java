@@ -2,7 +2,7 @@ package org.phantastikos.structures.hopital.services;
 
 import org.phantastikos.entite.creatures.Creature;
 
-public class CentreQuarantaine extends ServiceMedical {
+public class CentreQuarantaine extends ServiceMedicalSpecifique {
     private boolean isolation;
 
     public CentreQuarantaine(String nom, double superficie, int capaciteMax, Budget budget,boolean isolation) {
@@ -19,11 +19,8 @@ public class CentreQuarantaine extends ServiceMedical {
     }
 
     @Override
-    public void ajouterCreature(Creature creature) {
-        if (!creature.isContagieuse()) {
-            throw new IllegalArgumentException("Seules les créatures contagieuses peuvent être ajoutées à un centre de quarantaine.");
-        }
-        super.ajouterCreature(creature);
+    public boolean accepterCreature(Creature creature) {
+        return creature.isContagieuse();
     }
 
 

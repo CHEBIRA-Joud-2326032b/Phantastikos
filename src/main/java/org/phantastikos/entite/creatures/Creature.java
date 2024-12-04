@@ -54,7 +54,7 @@ public class Creature implements BaseComportements {
         this.sexe = sexe;
     }
 
-    public double getPoids() {
+    public int getPoids() {
         return poids;
     }
 
@@ -62,7 +62,7 @@ public class Creature implements BaseComportements {
         this.poids = poids;
     }
 
-    public double getTaille() {
+    public int getTaille() {
         return taille;
     }
 

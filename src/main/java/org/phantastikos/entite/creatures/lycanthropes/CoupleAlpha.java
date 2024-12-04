@@ -13,7 +13,10 @@ public class CoupleAlpha {
     public CoupleAlpha(Meute meute) {
         this.meute = meute;
         this.maleAlpha = trouverMaleAlpha();
+        maleAlpha.setRang('α');
         this.femelleAlpha = trouverFemelleAlpha();
+        femelleAlpha.setRang('α');
+        meute.actualiserNiveau();
     }
     public CoupleAlpha(Meute meute, Lycanthrope maleAlpha) {
         this.meute = meute;
@@ -50,10 +53,12 @@ public class CoupleAlpha {
 
     public void setMaleAlpha(Lycanthrope maleAlpha) {
         this.maleAlpha = maleAlpha;
+        this.maleAlpha.setRang('α');
     }
 
     public void setFemelleAlpha(Lycanthrope femelleAlpha) {
         this.femelleAlpha = femelleAlpha;
+        this.femelleAlpha.setRang('α');
     }
 
     public void donnerNaissance() {
@@ -64,8 +69,8 @@ public class CoupleAlpha {
         for (int i = 0; i < nombreEnfants; i++) {
             String nom = prenom.getName() + (meute.getMembres().size() + 1);
             char sexe = random.nextBoolean() ? 'M' : 'F';
-            double poids = 20 + random.nextDouble() * 30;
-            double taille = 60 + random.nextDouble() * 2;
+            int poids = 20 + random.nextInt(2) * 15;
+            int taille = 60 + random.nextInt(2) * 2;
             int age = 0;
             int force = 50 + random.nextInt(51);
             int facteurImpet = random.nextInt(10) + 1;

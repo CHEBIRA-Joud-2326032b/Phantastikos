@@ -5,32 +5,66 @@ import org.phantastikos.entite.creatures.Creature;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ServiceMedical {
     private String nom;
     private double superficie;
     private int capaciteMax;
-    private Budget budget;
+    private int budget;
+    private Budget catBudget;
     private List<Creature> creatures;
 
     public ServiceMedical(String nom, double superficie, int capaciteMax, Budget budget) {
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteMax = capaciteMax;
-        this.budget = budget;
+        this.catBudget = budget;
         this.creatures = new ArrayList<>();
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public double getSuperficie() {
+        return superficie;
+    }
+
+    public void setSuperficie(double superficie) {
+        this.superficie = superficie;
+    }
+
+    public int getCapaciteMax() {
+        return capaciteMax;
+    }
+
+    public void setCapaciteMax(int capaciteMax) {
+        this.capaciteMax = capaciteMax;
+    }
+
+    public int getBudget() {
+        return budget;
+    }
+
+    public void setBudget(int budget) {
+        this.budget = budget;
+    }
+
+    public void setCreatures(List<Creature> creatures) {
+        this.creatures = creatures;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public Budget getBudget() {
-        return budget;
+    public Budget getCatBudget() {
+        return catBudget;
     }
 
-    public void setBudget(Budget budget) {
-        this.budget = budget;
+    public void setCatBudget(Budget catBudget) {
+        this.catBudget = catBudget;
     }
 
     public List<Creature> getCreatures() {
@@ -49,6 +83,19 @@ public class ServiceMedical {
     public void enleverCreature(Creature creature) {
         creatures.remove(creature);
         creature.setResidence(null);
+    }
+
+    public void reviserBudget() {
+        if (creatures.size() >= capaciteMax-10) {
+            budget -= 50;
+        }
+    }
+
+    public void soignerCreatures(){
+        Random aleatoire = new Random();
+        for (Creature creature : creatures) {
+            creature.etreSoignee(creature.getMaladies().get(aleatoire.nextInt(creature.getMaladies().size())));
+        }
     }
 
     public String afficherDetails() {

@@ -2,10 +2,7 @@ package org.phantastikos.entite.creatures.lycanthropes;
 
 import org.phantastikos.structures.colonie.Colonie;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Meute {
     private Colonie colonie;
@@ -82,34 +79,70 @@ public class Meute {
     }
 
     public void changerCoupleAlpha(Lycanthrope nouveauMaleAlpha) {
+        Lycanthrope femelleAlpha = coupleAlpha.trouverFemelleAlpha();
         if (coupleAlpha == null) {
             coupleAlpha = new CoupleAlpha(this);
 
-        }else {
+        } else if (femelleAlpha == null) {
+            colonie.getMeutes().remove(this);
+        }
+        else {
             coupleAlpha.getFemelleAlpha().setRang(coupleAlpha.getMaleAlpha().getRang());
             coupleAlpha.setMaleAlpha(nouveauMaleAlpha);
-            coupleAlpha.setFemelleAlpha(coupleAlpha.trouverFemelleAlpha());
+            coupleAlpha.setFemelleAlpha(femelleAlpha);
+            actualiserNiveau();
         }
+
 
     }
     public void baisserRangMeute(){
         for (Lycanthrope l : membres){
             l.baisserRang();
         }
+        actualiserNiveau();
     }
 
-    public void declarerLycanthropeOmega(){
-        int moyenneNiveau = 0;
+    public void actualiserNiveau(){
         for (Lycanthrope l : membres){
+            l.calculNiveau();
+        }
+    }
+
+    public void actualiserSolitaire(){
+        Random aleatoire = new Random();
+        List<Lycanthrope> copie = new ArrayList<>(membres);
+        for (Lycanthrope l : copie){
+            if (l.getRang() == 'ω' && 25 > aleatoire.nextInt(101)){
+                l.quitterMeute();
+            }
+            actualiserNiveau();
+        }
+    }
+    public String declarerLycanthropeOmega() {
+        StringBuilder log = new StringBuilder();
+        int moyenneNiveau = 0;
+
+        log.append("Déclaration des Lycanthropes de rang Omega :\n");
+
+        for (Lycanthrope l : membres) {
             moyenneNiveau += l.getNiveau();
         }
         moyenneNiveau = moyenneNiveau / membres.size();
-        for (Lycanthrope l : membres){
-            if (l.getNiveau() <= moyenneNiveau - 20){
+        log.append("Niveau moyen des membres : ").append(moyenneNiveau).append(".\n");
+
+        for (Lycanthrope l : membres) {
+            if (l.getNiveau() <= moyenneNiveau - 20 && l.getRang() != 'α') {
                 l.setRang('ω');
+                log.append(l.getNom()).append(" est maintenant un Omega (niveau : ").append(l.getNiveau()).append(").\n");
             }
         }
+
+        actualiserNiveau();
+        log.append("Les niveaux des membres ont été actualisés.\n");
+
+        return log.toString();
     }
+
     public void reproduction(){
         coupleAlpha.donnerNaissance();
     }

@@ -82,11 +82,17 @@ public interface BaseComportements {
         int malchance = aleatoire.nextInt(101);
         if (malchance > 85){
             creature.setAge(creature.getAge() + 4);
+            creature.setTaille(creature.getTaille()+8);
+            creature.setPoids(creature.getPoids()+8);
         } else if (malchance > 65) {
             creature.setAge(creature.getAge() + 3);
+            creature.setTaille(creature.getTaille()+6);
+            creature.setPoids(creature.getPoids()+5);
         }
         else {
             creature.setAge(creature.getAge() + 2);
+            creature.setTaille(creature.getTaille()+5);
+            creature.setPoids(creature.getPoids()+4);
         }
     }
 }

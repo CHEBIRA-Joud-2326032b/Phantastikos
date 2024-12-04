@@ -1,0 +1,16 @@
+.scroll-pane {
+    -fx-background: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: rgba(50, 50, 50, 0.8);
+    -fx-opacity: 0.6;
+}
+
+.scroll-bar:hover {
+    -fx-opacity: 0.9;
+}

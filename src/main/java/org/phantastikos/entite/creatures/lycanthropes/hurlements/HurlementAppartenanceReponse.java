@@ -6,6 +6,6 @@ public class HurlementAppartenanceReponse implements HurlementStrategie{
 
     @Override
     public String emettre(Lycanthrope emetteur) {
-        return emetteur.getNom() + " répond au hurlement d'appartenance.";
+        return emetteur.getNom() + " répond au hurlement d'appartenance.\n";
     }
 }

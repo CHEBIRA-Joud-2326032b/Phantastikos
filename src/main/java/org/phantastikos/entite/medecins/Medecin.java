@@ -23,13 +23,10 @@ public class Medecin {
 
     public void soigner(ServiceMedical service) {
         System.out.println(nom + " soigne les créatures du service : " + service.getNom());
-        // Implémentation du soin
     }
 
-    public void reviserBudget(ServiceMedical service, Budget nouveauBudget) {
-        System.out.println(nom + " révise le budget du service : " + service.getNom());
-        service.setBudget(nouveauBudget);
-        System.out.println("Nouveau budget : " + service.getBudget());
+    public void reviserBudget(ServiceMedical service) {
+        service.reviserBudget();
     }
 
     public void transfererCreature(ServiceMedical ancien, Creature creature, ServiceMedical nouveau) {

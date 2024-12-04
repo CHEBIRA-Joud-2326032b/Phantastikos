@@ -18,7 +18,6 @@ public class Lycanthrope extends Creature implements Triage {
     private int niveau;
     private int facteurImpet;
     private Meute meute;
-    private boolean solitude;
 
     public Lycanthrope(String nom, char sexe, int poids, int taille, int age, int force, int facteurImpet, char rang, Meute meute) {
         super(nom, sexe, poids, taille, age);
@@ -30,7 +29,6 @@ public class Lycanthrope extends Creature implements Triage {
         catAge = CategorieAge.categoriser(age);
         setMoral(80);
         calculNiveau();
-        solitude = false;
     }
 
     public Lycanthrope(String nom, char sexe, int poids, int taille, int age, int force, int facteurImpet){
@@ -43,7 +41,6 @@ public class Lycanthrope extends Creature implements Triage {
         catAge = CategorieAge.categoriser(age);
         setMoral(80);
         calculNiveau();
-        solitude = true;
     }
     public void calculNiveau() {
         int numAge = (catAge == CategorieAge.JEUNE) ? 10 :
@@ -149,18 +146,9 @@ public class Lycanthrope extends Creature implements Triage {
     }
 
 
-    public boolean isSolitude() {
-        return solitude;
-    }
-
-    public void setSolitude(boolean solitude) {
-        this.solitude = solitude;
-    }
-
     public void quitterMeute(){
         meute.enleverLycanthrope(this);
         meute.ajouterSolitaire(this);
-        setSolitude(true);
 
     }
 

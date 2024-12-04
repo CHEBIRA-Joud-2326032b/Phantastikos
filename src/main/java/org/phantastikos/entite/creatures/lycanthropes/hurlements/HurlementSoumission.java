@@ -6,6 +6,6 @@ public class HurlementSoumission implements HurlementStrategie{
 
     @Override
     public String emettre(Lycanthrope emetteur) {
-        return emetteur.getNom() + " exprime sa soumission.";
+        return emetteur.getNom() + " exprime sa soumission.\n";
     }
 }

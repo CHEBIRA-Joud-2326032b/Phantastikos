@@ -4,49 +4,43 @@ import org.phantastikos.entite.creatures.Creature;
 import org.phantastikos.entite.etats.maladies.Maladie;
 import org.phantastikos.entite.etats.maladies.TypeMaladie;
 import org.phantastikos.structures.hopital.services.ServiceMedical;
-import org.phantastikos.vues.VueGenerale;
 import org.phantastikos.entite.medecins.Medecin;
-import org.phantastikos.entite.medecins.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.phantastikos.entite.etats.maladies.TypeMaladie.MDC;
 import static org.phantastikos.structures.hopital.services.Budget.*;
 
-public class Main {
+public class Hopital {
     private String nomHopital;
-    private List<Medecin> listeMedecins;
-    private List<Creature> listePatients;
-     private List<ServiceMedical> listeServices;
-
+    private int maxServices;
+    private List<ServiceMedical> services;
+    private List<Medecin> medecins;
     private int compteurTour;
 
-    // Constructeur
-    public Main(String nomHopital) {
+    public Hopital(String nomHopital) {
         this.nomHopital = nomHopital;
-        this.listeMedecins = new ArrayList<>();
-        this.listePatients = new ArrayList<>();
-        this.listeServices = new ArrayList<>();
+        this.services = new ArrayList<>();
         this.compteurTour = 0;
     }
 
-    // Méthodes pour ajouter et retirer des entités
-    public void ajouterMedecin(Medecin medecin) {
-        listeMedecins.add(medecin);
-    }
-
-    public void retirerMedecin(Medecin medecin) {
-        listeMedecins.remove(medecin);
+    public int nombreCreatures(){
+        int cpt = 0;
+        for (ServiceMedical service : services) {
+            for (Creature creature : service.getCreatures()) {
+                cpt++;
+            }
+        }
+        return cpt;
     }
 
     public void ajouterService(ServiceMedical Service) {
-        listeServices.add(Service);
+        services.add(Service);
     }
 
     public void retirerService(ServiceMedical Service) {
-        listeServices.remove(Service);
+        services.remove(Service);
     }
 
 
@@ -60,11 +54,9 @@ public class Main {
     }
 
 
-    // Méthode Main pour lancer le programme
     public static void main(String[] args) {
-        Main hopital = new Main("Hôpital Général");
+        Hopital hopital = new Hopital("Hôpital Général");
 
-        // Création de médecins et de patients
         Medecin medecin1 = new Medecin("Dr. Prout", "M", 12);
         ServiceMedical endroitDesBG = new ServiceMedical("L'endroit des BG !", 4, 10, INEXISTANT);
         ServiceMedical ServiceSud = new ServiceMedical("Service Sud", 7, 13, MEDIOCRE);
@@ -75,7 +67,6 @@ public class Main {
         Maladie maladieZPL = new Maladie(TypeMaladie.ZPL);
         loupGarou.ajouterMaladie(maladieZPL);
 
-        // Ajout des entités à l'hôpital
         hopital.ajouterMedecin(medecin1);
         hopital.ajouterService(endroitDesBG);
         hopital.ajouterService(ServiceSud);
@@ -85,9 +76,6 @@ public class Main {
         boolean jeuEnCours = true;
         int actionsRestantes = 5;
         Scanner scanner = new Scanner(System.in);
-
-        //vues.afficherMessage("Bienvenue dans la simulation de l'hôpital !");
-        //vues.afficherEtatHopital(hopital);
 
         while (jeuEnCours) {
             if (actionsRestantes == 0) {
