@@ -35,6 +35,7 @@ public class Medecin {
     public void transfererCreature(ServiceMedical ancien, Creature creature, ServiceMedical nouveau) {
         ancien.enleverCreature(creature);
         nouveau.ajouterCreature(creature);
+        creature.setResidence(nouveau);
     }
 
     public String getNom() {

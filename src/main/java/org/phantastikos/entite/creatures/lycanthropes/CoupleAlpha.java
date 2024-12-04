@@ -21,14 +21,19 @@ public class CoupleAlpha {
         this.femelleAlpha = trouverFemelleAlpha();
     }
 
-    private Lycanthrope trouverMaleAlpha() {
+    public CoupleAlpha(Lycanthrope maleAlpha, Lycanthrope femelleAlpha, Meute meute) {
+        this.maleAlpha = maleAlpha;
+        this.femelleAlpha = femelleAlpha;
+        this.meute = meute;
+    }
+    public Lycanthrope trouverMaleAlpha() {
         return meute.getMembres().stream()
                 .filter(m -> m.getSexe() == 'M' && m.getCatAge() == CategorieAge.ADULTE)
                 .max(Comparator.comparingInt(Lycanthrope::getForce))
                 .orElse(null);
     }
 
-    private Lycanthrope trouverFemelleAlpha() {
+    public Lycanthrope trouverFemelleAlpha() {
         return meute.getMembres().stream()
                 .filter(m -> m.getSexe() == 'F' && m.getCatAge() == CategorieAge.ADULTE)
                 .max(Comparator.comparingInt(Lycanthrope::getForce))

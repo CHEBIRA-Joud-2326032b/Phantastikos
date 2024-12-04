@@ -22,5 +22,6 @@ public class Colonie {
 
     public void ajouterMeute(Meute meute) {
         meutes.add(meute);
+        meute.setColonie(this);
     }
 }

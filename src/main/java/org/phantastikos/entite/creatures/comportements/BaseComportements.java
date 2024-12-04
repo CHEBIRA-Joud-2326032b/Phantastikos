@@ -75,4 +75,18 @@ public interface BaseComportements {
             cible.ajouterMaladie(new Maladie(maladieChoisie.getType()));
         }
     }
+
+    default void vieillir(){
+        Creature creature = (Creature) this;
+        Random aleatoire = new Random();
+        int malchance = aleatoire.nextInt(101);
+        if (malchance > 85){
+            creature.setAge(creature.getAge() + 4);
+        } else if (malchance > 65) {
+            creature.setAge(creature.getAge() + 3);
+        }
+        else {
+            creature.setAge(creature.getAge() + 2);
+        }
+    }
 }

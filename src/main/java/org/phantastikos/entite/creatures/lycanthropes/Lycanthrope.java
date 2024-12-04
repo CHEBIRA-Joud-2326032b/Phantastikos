@@ -3,6 +3,8 @@ package org.phantastikos.entite.creatures.lycanthropes;
 
 import org.phantastikos.entite.creatures.Creature;
 import org.phantastikos.entite.creatures.comportements.Triage;
+import org.phantastikos.entite.creatures.lycanthropes.hurlements.Hurlement;
+import org.phantastikos.entite.creatures.lycanthropes.hurlements.HurlementStrategie;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +29,18 @@ public class Lycanthrope extends Creature implements Triage {
         catAge = CategorieAge.categoriser(age);
         setMoral(80);
         calculNiveau();
+    }
 
-
+    public Lycanthrope(String nom, char sexe, double poids, double taille, int age, int force, int facteurImpet){
+        super(nom, sexe, poids, taille, age);
+        this.force = force;
+        this.facteurImpet = facteurImpet;
+        rang = 'S';
+        meute = null;
+        facteurDom = 5;
+        catAge = CategorieAge.categoriser(age);
+        setMoral(80);
+        calculNiveau();
     }
     public void calculNiveau() {
         int numAge = (catAge == CategorieAge.JEUNE) ? 10 :
@@ -110,6 +122,9 @@ public class Lycanthrope extends Creature implements Triage {
             attributs.put("moral", getMoral());
             attributs.put("maladies", getMaladies());
             attributs.put("chance", getChance());
+        } else if (getMeute() == null) {
+
+
         } else {
             attributs.put("nom", getNom());
             attributs.put("sexe", getSexe());
@@ -155,7 +170,7 @@ public class Lycanthrope extends Creature implements Triage {
             calculNiveau();
             cible.calculNiveau();
             if (cible.equals(meute.getCoupleAlpha().getMaleAlpha())){
-                meute.setCoupleAlpha(new CoupleAlpha(meute, this));
+                meute.changerCoupleAlpha(this);
             }
             return true;
         } else {
@@ -183,8 +198,8 @@ public class Lycanthrope extends Creature implements Triage {
         }
     }
 
-    public void emettreHurlement(TypeHurlement typeHurlement) {
-        new Hurlement(this, typeHurlement).emettre();
+    public String emettreHurlement(HurlementStrategie typeHurlement) {
+        return new Hurlement(this, typeHurlement).emettre();
     }
 
 }

@@ -9,10 +9,14 @@ public class Meute {
     private String nom;
     private List<Lycanthrope> membres;
     private CoupleAlpha coupleAlpha;
+    private String descriptionHurlement;
 
 
-    public Meute(List<Lycanthrope> membres) {
+    public Meute(Colonie colonie, String nom, List<Lycanthrope> membres, String descriptionHurlement) {
+        this.colonie = colonie;
+        this.nom = nom;
         this.membres = membres;
+        this.descriptionHurlement = descriptionHurlement;
     }
 
     public Colonie getColonie() {
@@ -47,6 +51,13 @@ public class Meute {
         this.coupleAlpha = coupleAlpha;
     }
 
+    public String getDescriptionHurlement() {
+        return descriptionHurlement;
+    }
+
+    public void setDescriptionHurlement(String descriptionHurlement) {
+        this.descriptionHurlement = descriptionHurlement;
+    }
     public void ajouterLycanthrope(Lycanthrope nouveau) {
         membres.add(nouveau);
     }
@@ -54,10 +65,17 @@ public class Meute {
     public void enleverLycanthrope(Lycanthrope ancien){
         membres.remove(ancien);
     }
-    public void changerCoupleAlpha(Lycanthrope nouveauMaleAlpha, Lycanthrope nouvelleFemelleAlpha) {
-        coupleAlpha.getFemelleAlpha().setRang(coupleAlpha.getMaleAlpha().getRang());
-        coupleAlpha.setMaleAlpha(nouveauMaleAlpha);
-        coupleAlpha.setFemelleAlpha(nouvelleFemelleAlpha);
+
+    public void changerCoupleAlpha(Lycanthrope nouveauMaleAlpha) {
+        if (coupleAlpha == null) {
+            coupleAlpha = new CoupleAlpha(this);
+
+        }else {
+            coupleAlpha.getFemelleAlpha().setRang(coupleAlpha.getMaleAlpha().getRang());
+            coupleAlpha.setMaleAlpha(nouveauMaleAlpha);
+            coupleAlpha.setFemelleAlpha(coupleAlpha.trouverFemelleAlpha());
+        }
+
     }
     public void baisserRangMeute(){
         for (Lycanthrope l : membres){
@@ -65,7 +83,20 @@ public class Meute {
         }
     }
 
+    public void declarerLycanthropeOmega(){
+        int moyenneNiveau = 0;
+        for (Lycanthrope l : membres){
+            moyenneNiveau += l.getNiveau();
+        }
+        moyenneNiveau = moyenneNiveau / membres.size();
+        for (Lycanthrope l : membres){
+            if (l.getNiveau() <= moyenneNiveau - 20){
+                l.setRang('ω');
+            }
+        }
+    }
     public void reproduction(){
         coupleAlpha.donnerNaissance();
     }
+
 }
