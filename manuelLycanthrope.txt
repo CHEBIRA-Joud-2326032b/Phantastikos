@@ -1,0 +1,9 @@
+Manuel d'utilisation : Jeu des Colonies de Lycanthropes  
+
+Pour commencer une partie du Jeu des Colonies de Lycanthropes, cliquez sur "Commencer une partie", puis sélectionnez l'option "Colonie". Une fois la partie lancée, une interface apparaît dans le coin inférieur gauche de l'écran. Par défaut, une première colonie intitulée "Meute 1" est créée automatiquement, dirigée par un couple Alpha. Ce couple joue un rôle central dans la survie et le développement de la meute.  
+
+Vous pouvez ensuite avancer le temps en appuyant sur le bouton correspondant pour observer l’évolution de votre colonie. Au fil du temps, votre meute s’agrandira, de nouveaux membres rejoindront ses rangs, et d’autres meutes indépendantes pourront se former dans l’univers du jeu.  
+
+À mesure que vous progressez, vous devrez gérer votre meute en prenant des décisions stratégiques pour améliorer sa puissance et son influence. Vous pouvez interagir avec d’autres meutes en établissant des alliances ou en entrant en conflit avec elles. Exploitez les ressources du territoire pour renforcer vos forces, développer votre hurlement emblématique et étendre votre domination.  
+
+Le jeu s'enrichit progressivement, et votre objectif est de faire prospérer votre colonie tout en consolidant la domination de votre meute. Adaptez vos choix pour survivre face aux rivalités croissantes et aux événements imprévus. Bonne chance dans votre quête pour devenir la meute dominante !
