@@ -8,8 +8,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Classe de tests unitaires pour les différentes fonctionnalités des créatures.
+ * Ces tests valident les comportements des différentes entités et méthodes dans le cadre du jeu.
+ */
 public class CreatureTest {
 
+    /**
+     * Teste la méthode attendre() d'un HommeBete lorsque son moral est déjà normal.
+     * Vérifie que le moral reste inchangé après l'attente.
+     */
     @Test
     void attendreTest() {
         ServiceMedical residence = new ServiceMedical("HPP",1000,70, Budget.INEXISTANT);
@@ -19,6 +27,10 @@ public class CreatureTest {
         assertEquals(70, hommeBete.getMoral());
     }
 
+    /**
+     * Teste la méthode hurler() d'un HommeBete lorsque son moral est faible.
+     * Vérifie que le compteur de hurlements s'incrémente après l'attente.
+     */
     @Test
     void hurlerTest() {
         ServiceMedical residence = new ServiceMedical("HPP",800,50, Budget.INEXISTANT);
@@ -29,6 +41,10 @@ public class CreatureTest {
         assertEquals(1, hommeBete.getCptHurlements());
     }
 
+    /**
+     * Teste le comportement d'un HommeBete qui se met en colère après plusieurs hurlements.
+     * Vérifie que le nombre de hurlements est bien supérieur ou égal à 3.
+     */
     @Test
     void sEmporterTest() {
         HommeBete hommeBete = new HommeBete("Prout", 'Z', 78, 187, 256);
@@ -37,6 +53,10 @@ public class CreatureTest {
         assertTrue(hommeBete.getCptHurlements() >= 3);
     }
 
+    /**
+     * Teste la méthode tomberMalade() d'un HommeBete en l'infectant avec une maladie.
+     * Vérifie que la maladie est correctement ajoutée à la liste des maladies de l'HommeBete.
+     */
     @Test
     void tomberMaladeTest() {
         HommeBete hommeBete = new HommeBete("Prout", 'Z', 78, 187, 256);
@@ -45,6 +65,10 @@ public class CreatureTest {
         assertTrue(hommeBete.getMaladies().contains(maladie));
     }
 
+    /**
+     * Teste la méthode etreSoignee() pour un HommeBete malade.
+     * Vérifie que la maladie est guérie et que le moral de l'HommeBete est correctement modifié.
+     */
     @Test
     void etreSoigneeTest() {
         HommeBete hommeBete = new HommeBete("Prout", 'Z', 78, 187, 256);
@@ -59,6 +83,11 @@ public class CreatureTest {
         }
     }
 
+    /**
+     * Teste la méthode trepasser() d'un HommeBete avec une chance de survie faible.
+     * Vérifie que l'HommeBete meurt lorsque sa chance de survie est nulle.
+     * Vérifie qu'il ne meurt pas lorsque la chance de survie est élevée.
+     */
     @Test
     void trepasserTest() {
         HommeBete hommeBete = new HommeBete("Prout", 'Z', 78, 187, 256);
@@ -70,6 +99,10 @@ public class CreatureTest {
         assertFalse(isDead);
     }
 
+    /**
+     * Teste la méthode contaminer() d'un HommeBete.
+     * Vérifie que la maladie est transmise à une autre créature.
+     */
     @Test
     void contaminerTest() {
         ServiceMedical residence = new ServiceMedical("HPP",1800,250, Budget.FAIBLE);
@@ -89,6 +122,10 @@ public class CreatureTest {
         assertTrue(cibleContaminee);
     }
 
+    /**
+     * Teste la méthode attendre() pour un Elfe avec un moral initial élevé.
+     * Vérifie que l'attente n'affecte pas le moral.
+     */
     @Test
     void vipAttendreTest() {
         Elfe elfe = new Elfe("VIP-Elfe", 'F', 50, 160, 100);
@@ -97,6 +134,10 @@ public class CreatureTest {
         assertEquals(50, elfe.getMoral());
     }
 
+    /**
+     * Teste la méthode attendre() pour un HommeBete dans une situation de triage.
+     * Vérifie que le moral d'un HommeBete augmente en fonction du service médical.
+     */
     @Test
     void triageAttendreTest() {
         ServiceMedical residence = new ServiceMedical("HPP",600,70, Budget.MEDIOCRE);
