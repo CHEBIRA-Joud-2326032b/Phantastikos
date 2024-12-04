@@ -15,7 +15,7 @@ class HurlementTest {
 
     @Test
     void testHurlementAgressivite() {
-        Lycanthrope aggressor = new Lycanthrope("Loup Enragé", 'M', 85, 1.9, 30, 20, 15);
+        Lycanthrope aggressor = new Lycanthrope("Loup Enragé", 'M', 85, 190, 30, 20, 15);
         HurlementStrategie strategie = new HurlementAgressivite();
         String resultat = strategie.emettre(aggressor);
         assertEquals("Loup Enragé exprime son agressivité !", resultat);
@@ -26,7 +26,7 @@ class HurlementTest {
         Colonie colonie = new Colonie();
         Meute meute = new Meute(null, "Meute Sombre", List.of(), "Hurlement Sombre");
         colonie.ajouterMeute(meute);
-        Lycanthrope membre = new Lycanthrope("Membre", 'M', 70, 1.8, 25, 14, 8, 'γ', meute);
+        Lycanthrope membre = new Lycanthrope("Membre", 'M', 70, 180, 25, 14, 8, 'γ', meute);
         meute.setMembres(List.of(membre));
         HurlementStrategie strategie = new HurlementAppartenance();
         String resultat = strategie.emettre(membre);
@@ -38,7 +38,7 @@ class HurlementTest {
         Colonie colonie = new Colonie();
         Meute meute = new Meute(null, "Meute Dominante", List.of(), "Hurlement Puissant");
         colonie.ajouterMeute(meute);
-        Lycanthrope dominateur = new Lycanthrope("Alpha Dominateur", 'M', 90, 1.9, 35, 25, 18, 'α', meute);
+        Lycanthrope dominateur = new Lycanthrope("Alpha Dominateur", 'M', 90, 190, 35, 25, 18, 'α', meute);
         HurlementStrategie strategie = new HurlementDomination();
         String resultat = strategie.emettre(dominateur);
         assertTrue(resultat.contains("exprime sa domination"));

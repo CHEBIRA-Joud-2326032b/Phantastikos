@@ -69,8 +69,8 @@ public class Main {
         ServiceMedical endroitDesBG = new ServiceMedical("L'endroit des BG !", 4, 10, INEXISTANT);
         ServiceMedical ServiceSud = new ServiceMedical("Service Sud", 7, 13, MEDIOCRE);
 
-        Creature loupGarou = new Creature("Loup-Garou Malade", 'M', 80.0, 1.90, 150);
-        Creature vampire = new Creature("Vampire Fatigué", 'F', 65.0, 1.75, 200);
+        Creature loupGarou = new Creature("Loup-Garou Malade", 'M', 80, 190, 150);
+        Creature vampire = new Creature("Vampire Fatigué", 'F', 65, 175, 200);
 
         Maladie maladieZPL = new Maladie(TypeMaladie.ZPL);
         loupGarou.ajouterMaladie(maladieZPL);
@@ -100,9 +100,6 @@ public class Main {
 
                     // Vérifiez les créatures qui s'emportent et gérez la contagion
                     for (Creature creature : service.getCreatures()) {
-                        if (creature.estEmporte()) {
-                            creature.contaminer(service.getCreatures());
-                        }
                     }
                 }
                 actionsRestantes = 5;

@@ -2,7 +2,10 @@ package org.phantastikos.entite.creatures.lycanthropes;
 
 import org.phantastikos.structures.colonie.Colonie;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Meute {
     private Colonie colonie;
@@ -10,13 +13,16 @@ public class Meute {
     private List<Lycanthrope> membres;
     private CoupleAlpha coupleAlpha;
     private String descriptionHurlement;
+    private List<Lycanthrope> solitaires;
 
 
     public Meute(Colonie colonie, String nom, List<Lycanthrope> membres, String descriptionHurlement) {
         this.colonie = colonie;
         this.nom = nom;
-        this.membres = membres;
+        this.membres = new ArrayList<Lycanthrope>(membres);
+        this.solitaires = new ArrayList<Lycanthrope>();
         this.descriptionHurlement = descriptionHurlement;
+        coupleAlpha = new CoupleAlpha(this);
     }
 
     public Colonie getColonie() {
@@ -66,6 +72,15 @@ public class Meute {
         membres.remove(ancien);
     }
 
+    public Map<String, String> recupererAttributs(){
+        Map<String, String> attributs = new HashMap<>();
+        attributs.put("nom", nom);
+        attributs.put("nombre de membres", ""+membres.size());
+        attributs.put("coupleAlpha", coupleAlpha.getMaleAlpha().getNom()+"❤"+coupleAlpha.getFemelleAlpha().getNom());
+        attributs.put("descriptionHurlement", descriptionHurlement);
+        return attributs;
+    }
+
     public void changerCoupleAlpha(Lycanthrope nouveauMaleAlpha) {
         if (coupleAlpha == null) {
             coupleAlpha = new CoupleAlpha(this);
@@ -97,6 +112,21 @@ public class Meute {
     }
     public void reproduction(){
         coupleAlpha.donnerNaissance();
+    }
+
+    public List<Lycanthrope> getSolitaires() {
+        return solitaires;
+    }
+
+    public void setSolitaires(List<Lycanthrope> solitaires) {
+        this.solitaires = solitaires;
+    }
+
+    public void ajouterSolitaire(Lycanthrope l){
+        solitaires.add(l);
+    }
+    public void enleverSolitaire(Lycanthrope l){
+        solitaires.remove(l);
     }
 
 }

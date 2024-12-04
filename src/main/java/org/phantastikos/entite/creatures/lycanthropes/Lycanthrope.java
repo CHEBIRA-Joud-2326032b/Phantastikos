@@ -18,8 +18,9 @@ public class Lycanthrope extends Creature implements Triage {
     private int niveau;
     private int facteurImpet;
     private Meute meute;
+    private boolean solitude;
 
-    public Lycanthrope(String nom, char sexe, double poids, double taille, int age, int force, int facteurImpet, char rang, Meute meute) {
+    public Lycanthrope(String nom, char sexe, int poids, int taille, int age, int force, int facteurImpet, char rang, Meute meute) {
         super(nom, sexe, poids, taille, age);
         this.force = force;
         this.facteurImpet = facteurImpet;
@@ -29,9 +30,10 @@ public class Lycanthrope extends Creature implements Triage {
         catAge = CategorieAge.categoriser(age);
         setMoral(80);
         calculNiveau();
+        solitude = false;
     }
 
-    public Lycanthrope(String nom, char sexe, double poids, double taille, int age, int force, int facteurImpet){
+    public Lycanthrope(String nom, char sexe, int poids, int taille, int age, int force, int facteurImpet){
         super(nom, sexe, poids, taille, age);
         this.force = force;
         this.facteurImpet = facteurImpet;
@@ -41,6 +43,7 @@ public class Lycanthrope extends Creature implements Triage {
         catAge = CategorieAge.categoriser(age);
         setMoral(80);
         calculNiveau();
+        solitude = true;
     }
     public void calculNiveau() {
         int numAge = (catAge == CategorieAge.JEUNE) ? 10 :
@@ -110,44 +113,55 @@ public class Lycanthrope extends Creature implements Triage {
         this.catAge = catAge;
     }
 
-    public Map<String, Object> recupererAttributs() {
-        Map<String, Object> attributs = new HashMap<>();
+    @Override
+    public Map<String, String> recupererAttributs() {
+        Map<String, String> attributs = new HashMap<>();
+        attributs.put("nom", getNom());
+        attributs.put("sexe", ""+getSexe());
+        attributs.put("poids", ""+getPoids());
+        attributs.put("taille", ""+getTaille());
+        attributs.put("moral", ""+getMoral());
+        attributs.put("maladies", getMaladies().toString());
+        attributs.put("chance", ""+getChance());
 
         if (getResidence() != null) {
-            attributs.put("nom", getNom());
-            attributs.put("sexe", getSexe());
-            attributs.put("poids", getPoids());
-            attributs.put("taille", getTaille());
-            attributs.put("age", getAge());
-            attributs.put("moral", getMoral());
-            attributs.put("maladies", getMaladies());
-            attributs.put("chance", getChance());
+            attributs.put("age", ""+getAge());
+            attributs.put("cptHurlements", ""+getCptHurlements());
+            attributs.put("nbrAttente", ""+getNbrAttente());
         } else if (getMeute() == null) {
-
+            attributs.put("catAge", catAge.toString());
+            attributs.put("force", ""+force);
+            attributs.put("facteurDom", ""+facteurDom);
+            attributs.put("niveau", ""+niveau);
+            attributs.put("facteurImpet", ""+facteurImpet);
 
         } else {
-            attributs.put("nom", getNom());
-            attributs.put("sexe", getSexe());
-            attributs.put("poids", getPoids());
-            attributs.put("taille", getTaille());
-            attributs.put("catAge", catAge);
-            attributs.put("moral", getMoral());
-            attributs.put("maladies", getMaladies());
-            attributs.put("chance", getChance());
-            attributs.put("force", force);
-            attributs.put("facteurDom", facteurDom);
-            attributs.put("rang", rang);
-            attributs.put("niveau", niveau);
-            attributs.put("facteurImpet", facteurImpet);
-            attributs.put("meute", meute);
+            attributs.put("catAge", catAge.toString());
+            attributs.put("force", ""+force);
+            attributs.put("facteurDom", ""+facteurDom);
+            attributs.put("rang", ""+rang);
+            attributs.put("niveau", ""+niveau);
+            attributs.put("facteurImpet", ""+facteurImpet);
+            attributs.put("meute", meute.getNom());
         }
 
         return attributs;
     }
 
 
+    public boolean isSolitude() {
+        return solitude;
+    }
+
+    public void setSolitude(boolean solitude) {
+        this.solitude = solitude;
+    }
+
     public void quitterMeute(){
-        meute = null;
+        meute.enleverLycanthrope(this);
+        meute.ajouterSolitaire(this);
+        setSolitude(true);
+
     }
 
     private boolean dominerPossible(Lycanthrope cible) {
