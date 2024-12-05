@@ -2,7 +2,10 @@ package org.phantastikos.structures.hopital.services;
 
 import org.phantastikos.entite.creatures.Creature;
 
-public class Crypte extends ServiceMedicalSpecifique {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Crypte extends ServiceMedical {
     private int niveauVentilation;
     private double temperature;
 
@@ -34,23 +37,33 @@ public class Crypte extends ServiceMedicalSpecifique {
     }
 
     @Override
-    public void reviserBudget() {
+    public String reviserBudget() {
+        int cpt = 0;
         if (getCreatures().size() >= getCapaciteMax()-10) {
             setBudget(getBudget()-50);
+            cpt++;
         }
         if(niveauVentilation <= 2) {
             setBudget(getBudget()-25);
+            cpt ++;
         }
         if (temperature > 20.0) {
             setBudget(getBudget()-25);
+            cpt ++;
         }
         setCatBudget(Budget.CategoriserBudget(getBudget()));
+        return "Le budget a été révisé " + cpt + " fois";
     }
+
     @Override
-    public String afficherDetails() {
-        StringBuilder details = new StringBuilder(super.afficherDetails());
-        details.append("Niveau de ventilation : ").append(niveauVentilation).append("\n");
-        details.append("Température : ").append(temperature).append("°C\n");
-        return details.toString();
+    public Map<String, String> recupererAttributs(){
+        Map<String, String> attributs = new HashMap<>();
+        attributs.put("nom", getNom());
+        attributs.put("superficie", ""+getSuperficie());
+        attributs.put("capaciteMax", ""+getCapaciteMax());
+        attributs.put("budget", getCatBudget().toString());
+        attributs.put("niveauVentilation", ""+getNiveauVentilation());
+        attributs.put("temperature", ""+getTemperature());
+        return attributs;
     }
 }

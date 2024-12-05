@@ -42,17 +42,23 @@ public interface BaseComportements {
         creature.ajouterMaladie(maladie);
     }
 
-    default void etreSoignee(Maladie maladie) {
+    default String etreSoignee(Maladie maladie) {
         Creature creature = (Creature) this;
         Random malchance = new Random();
         if (creature.getChance() >malchance.nextInt(101)) {
             creature.enleverMaladie(maladie);
             creature.setMoral(creature.getMoral() + 40);
+            return creature.getNom() + " n'a plus la maladie" + maladie.getNomAbrege() + " et a gagné 40 de moral : " + creature.getMoral();
         }
         else {
             maladie.diminuerNiveau(maladie.getNiveauActuel()/2);
+            if (maladie.getNiveauActuel() <= 0){
+                creature.enleverMaladie(maladie);
+            }
             creature.setMoral(creature.getMoral() + 20);
+            return "le niveau de la maladie " + maladie.getNomAbrege() + " de " + creature.getNom() + "a baissé => " + maladie.getNiveauActuel() + " et son moral a augmenté de 20 : " + creature.getMoral();
         }
+
 
     }
 

@@ -2,7 +2,10 @@ package org.phantastikos.structures.hopital.services;
 
 import org.phantastikos.entite.creatures.Creature;
 
-public class CentreQuarantaine extends ServiceMedicalSpecifique {
+import java.util.HashMap;
+import java.util.Map;
+
+public class CentreQuarantaine extends ServiceMedical {
     private boolean isolation;
 
     public CentreQuarantaine(String nom, double superficie, int capaciteMax, Budget budget,boolean isolation) {
@@ -25,9 +28,26 @@ public class CentreQuarantaine extends ServiceMedicalSpecifique {
 
 
     @Override
-    public String afficherDetails() {
-        StringBuilder details = new StringBuilder(super.afficherDetails());
-        details.append("Isolation : ").append(isolation ? "Activée" : "Désactivée").append("\n");
-        return details.toString();
+    public String reviserBudget(){
+        int cpt = 0;
+        if (getCreatures().size() >= getCapaciteMax()-10) {
+            setBudget(getBudget()-50);
+            cpt++;
+        }
+        if (!isolation) {
+            setBudget(getBudget()-50);
+            cpt++;
+        }
+        return "Le budget a été révisé " + cpt + " fois";
+    }
+    @Override
+    public Map<String, String> recupererAttributs() {
+        Map<String, String> attributs = new HashMap<>();
+        attributs.put("nom", getNom());
+        attributs.put("superficie", "" + getSuperficie());
+        attributs.put("capaciteMax", "" + getCapaciteMax());
+        attributs.put("bduget", getCatBudget().toString());
+        attributs.put("isolation", "" + isolation);
+        return attributs;
     }
 }

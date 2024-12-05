@@ -10,11 +10,12 @@ public abstract class ServiceMedicalSpecifique extends ServiceMedical {
     public abstract boolean accepterCreature(Creature creature);
 
     @Override
-    public void ajouterCreature(Creature creature) {
+    public String ajouterCreature(Creature creature) {
         if (!accepterCreature(creature)) {
-            throw new IllegalArgumentException("La créature ne correspond pas aux critères de ce service médical.");
+            return "La créature" + creature.getNom() + "ne correspond pas aux critères de ce service médical.";
         }
-        super.ajouterCreature(creature);
+        return super.ajouterCreature(creature);
+
     }
 }
 

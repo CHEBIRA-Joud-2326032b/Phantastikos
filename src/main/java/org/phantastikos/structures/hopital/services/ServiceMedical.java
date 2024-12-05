@@ -3,9 +3,7 @@ package org.phantastikos.structures.hopital.services;
 
 import org.phantastikos.entite.creatures.Creature;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ServiceMedical {
     private String nom;
@@ -70,42 +68,57 @@ public class ServiceMedical {
     public List<Creature> getCreatures() {
         return creatures;
     }
+    public boolean accepterCreature(Creature creature) {
+        if (creatures.isEmpty()) {
+            return true;
+        }
 
-    public void ajouterCreature(Creature creature) {
+        Class<?> typePremiereCreature = creatures.getFirst().getClass();
+        return typePremiereCreature.equals(creature.getClass());
+    }
+
+    public String ajouterCreature(Creature creature) {
         if (creatures.size() < capaciteMax) {
             creatures.add(creature);
             creature.setResidence(this);
+            return "La creature" + creature.getNom() + " est maintenant dans le service " + creature.getResidence();
         } else {
-            System.out.println("Impossible d'ajouter la créature : capacité maximale atteinte !");
+            return "Impossible d'ajouter la créature"+ creature.getNom() +": capacité maximale atteinte !";
         }
     }
 
-    public void enleverCreature(Creature creature) {
+    public String enleverCreature(Creature creature) {
         creatures.remove(creature);
         creature.setResidence(null);
+        return "la creature " + creature.getNom() + " n'est plus dans le service " + creature.getResidence();
     }
 
-    public void reviserBudget() {
+    public String reviserBudget() {
         if (creatures.size() >= capaciteMax-10) {
             budget -= 50;
+            return "Le budget a été révisé";
         }
+        return "Le budget n'a pas été révisé";
     }
 
-    public void soignerCreatures(){
+    public String soignerCreatures(){
         Random aleatoire = new Random();
+        StringBuilder log = new StringBuilder();
         for (Creature creature : creatures) {
-            creature.etreSoignee(creature.getMaladies().get(aleatoire.nextInt(creature.getMaladies().size())));
+             int nbrMaladies = creature.getMaladies().size();
+             if (nbrMaladies > 0) {
+                 log.append(creature.etreSoignee(creature.getMaladies().get(aleatoire.nextInt(nbrMaladies)))).append("\n");
+             }
         }
+        return log.toString();
     }
 
-    public String afficherDetails() {
-        StringBuilder details = new StringBuilder();
-        details.append("Service Médical : ").append(nom).append("\n");
-        details.append("Budget : ").append(budget).append("\n");
-        details.append("Liste des créatures :\n");
-        for (Creature creature : creatures) {
-            details.append("- ").append(creature.getNom()).append("\n");
-        }
-        return details.toString();
+    public Map<String, String> recupererAttributs() {
+        Map<String, String> attributs = new HashMap<>();
+        attributs.put("nom", nom);
+        attributs.put("superficie", ""+superficie);
+        attributs.put("capaciteMax", ""+capaciteMax);
+        attributs.put("budget", catBudget.toString());
+        return attributs;
     }
 }

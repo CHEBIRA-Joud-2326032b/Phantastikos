@@ -31,4 +31,12 @@ public class Vampire extends Creature implements Vip, ComportementMultiple {
         return ComportementMultiple.super.trepasser();
     }
 
+    @Override
+    public boolean isContagieuse() {
+        return super.isContagieuse();
+    }
+    @Override
+    public boolean isRegenerante(){
+        return super.isRegenerante();
+    }
 }

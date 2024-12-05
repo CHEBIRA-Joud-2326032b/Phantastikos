@@ -114,6 +114,7 @@ public class Creature implements BaseComportements {
     }
 
     public void ajouterMaladie(Maladie maladie) {
+        maladie.changerNiveau(1);
         this.maladies.add(maladie);
     }
 

@@ -17,9 +17,15 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
+import org.phantastikos.entite.creatures.Creature;
 import org.phantastikos.entite.creatures.lycanthropes.Lycanthrope;
 import org.phantastikos.entite.creatures.lycanthropes.Meute;
 import org.phantastikos.structures.colonie.Colonie;
+import org.phantastikos.structures.hopital.Hopital;
+import org.phantastikos.structures.hopital.services.Budget;
+import org.phantastikos.structures.hopital.services.CentreQuarantaine;
+import org.phantastikos.structures.hopital.services.Crypte;
+import org.phantastikos.structures.hopital.services.ServiceMedical;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +36,7 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.getSettings;
 
 public class VueGenerale extends GameApplication {
     private Colonie colonie;
+    private Hopital hopital;
     private VBox sectionButtons;
     private VBox statsPane;
     private VBox popUp;
@@ -46,6 +53,16 @@ public class VueGenerale extends GameApplication {
             lyc1.setMeute(meute1);
             lyc2.setMeute(meute1);
             colonie.ajouterMeute(meute1);
+        }
+        if (hopital == null) {
+            hopital = new Hopital("Phantastikos", 5);
+            Crypte crypte = new Crypte("Krypton", 1500, 50, Budget.FAIBLE,3, 18);
+            CentreQuarantaine centreQuarantaine = new CentreQuarantaine("Karanton", 800, 50, Budget.INSUFFISANT,false);
+            ServiceMedical serviceMedical = new ServiceMedical("Server", 2000, 150, Budget.MEDIOCRE);
+            hopital.ajouterService(serviceMedical);
+            hopital.ajouterService(crypte);
+            hopital.ajouterService(centreQuarantaine);
+
         }
     }
     @Override
@@ -171,7 +188,7 @@ public class VueGenerale extends GameApplication {
             btnMeute.setStyle("-fx-font-size: 16px; -fx-padding: 10;");
             btnMeute.setOnAction(e -> {
                 FXGL.getNotificationService().pushNotification("Meute sélectionnée : " + meute.getNom());
-                afficherPopUp(meute);
+                afficherPopUpMeute(meute);
             });
             boutons.add(btnMeute);
         }
@@ -186,7 +203,7 @@ public class VueGenerale extends GameApplication {
     }
 
 
-    private void afficherPopUp(Meute meute) {
+    private void afficherPopUpMeute(Meute meute) {
         var menuScene = FXGL.getGameScene();
         Rectangle fond = new Rectangle(FXGL.getAppWidth(), FXGL.getAppHeight());
         fond.setFill(Color.color(0, 0, 0, 0.5));
@@ -230,6 +247,57 @@ public class VueGenerale extends GameApplication {
 
         menuScene.getRoot().getChildren().addAll(fond, popUp);
     }
+    private void afficherPopUpService(ServiceMedical service) {
+        var menuScene = FXGL.getGameScene();
+        Rectangle fond = new Rectangle(FXGL.getAppWidth(), FXGL.getAppHeight());
+        fond.setFill(Color.color(0, 0, 0, 0.5));
+        fond.setOnMouseClicked(event -> {
+            event.consume();
+        });
+
+        popUp = new VBox(10);
+        popUp.setStyle("-fx-background-color: #2e2e2e; -fx-padding: 20; -fx-border-color: white; -fx-border-width: 2;");
+        popUp.setEffect(new DropShadow(15, Color.BLACK));
+        popUp.setAlignment(javafx.geometry.Pos.CENTER);
+
+        popUp.setLayoutX(FXGL.getAppWidth() / 2 - 150);
+        popUp.setLayoutY(FXGL.getAppHeight() / 2 - 100);
+
+        Text titreMenu = new Text("Choisissez une option");
+        titreMenu.setStyle("-fx-font-size: 18; -fx-fill: white;");
+        titreMenu.setEffect(new DropShadow(10, Color.BLACK));
+
+        Button btnVoirCaracteristiques = new Button("Voir Caractéristiques");
+        btnVoirCaracteristiques.setStyle("-fx-font-size: 16; -fx-background-color: #505050; -fx-text-fill: white;");
+        btnVoirCaracteristiques.setOnAction(e -> {
+            afficherStats(service.recupererAttributs());
+            enlever(List.of(fond, popUp));
+        });
+
+        Button btnVoirPatient = new Button("Voir Patients");
+        btnVoirPatient.setStyle("-fx-font-size: 16; -fx-background-color: #505050; -fx-text-fill: white;");
+        btnVoirPatient.setOnAction(e -> {
+            afficherPatient(service);
+            enlever(List.of(fond, popUp));
+        });
+        Button btnSoignerCreatures = new Button("Soigner Creatures");
+        btnSoignerCreatures.setStyle("-fx-font-size: 16; -fx-background-color: #505050; -fx-text-fill: white;");
+        btnSoignerCreatures.setOnAction(e -> {
+            String rapports = service.soignerCreatures() + hopital.avancerTemps(5);
+            afficherRapportDansStatsPane(rapports);
+            enlever(List.of(fond, popUp));
+        });
+
+        Button btnRetour = new Button("Retour");
+        btnRetour.setStyle("-fx-font-size: 16; -fx-background-color: #505050; -fx-text-fill: white;");
+        btnRetour.setOnAction(e -> {
+            enlever(List.of(fond, popUp));
+        });
+
+        popUp.getChildren().addAll(titreMenu, btnVoirCaracteristiques, btnVoirPatient, btnSoignerCreatures, btnRetour);
+
+        menuScene.getRoot().getChildren().addAll(fond, popUp);
+    }
 
     private void afficherLycanthropes(Meute meute) {
         statsPane.getChildren().clear();
@@ -255,6 +323,36 @@ public class VueGenerale extends GameApplication {
         Button btnRetour = new Button("Retour");
         btnRetour.setStyle("-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: red;-fx-text-fill: white");
         btnRetour.setOnAction(e -> afficherColonie());
+        ajouterBoutonsDansGrille(boutons, grille, 5, btnRetour);
+        ScrollPane scroll = new ScrollPane(grille);
+        scroll.setFitToWidth(true);
+        scroll.setPrefHeight(sectionButtons.getPrefHeight());
+        sectionButtons.getChildren().add(scroll);
+    }
+
+    private void afficherPatient(ServiceMedical service) {
+        statsPane.getChildren().clear();
+        sectionButtons.getChildren().clear();
+
+        Text titre = new Text("Patients du Service : "+service.getNom());
+        titre.setStyle("-fx-font-size: 20px; -fx-fill: white;");
+        sectionButtons.getChildren().add(titre);
+        GridPane grille = new GridPane();
+        grille.setHgap(10);
+        grille.setVgap(10);
+        ArrayList<Button> boutons = new ArrayList<>();
+        for (Creature patient : service.getCreatures()) {
+            Button btnPatient = new Button(patient.getNom());
+            btnPatient.setStyle("-fx-font-size: 16px; -fx-padding: 10;");
+
+            btnPatient.setOnAction(e -> afficherStats(patient.recupererAttributs()));
+
+            sectionButtons.getChildren().add(btnPatient);
+            boutons.add(btnPatient);
+        }
+        Button btnRetour = new Button("Retour");
+        btnRetour.setStyle("-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: red;-fx-text-fill: white");
+        btnRetour.setOnAction(e -> afficherHopital());
         ajouterBoutonsDansGrille(boutons, grille, 5, btnRetour);
         ScrollPane scroll = new ScrollPane(grille);
         scroll.setFitToWidth(true);
@@ -303,6 +401,36 @@ public class VueGenerale extends GameApplication {
 
     private void afficherHopital() {
         sectionButtons.getChildren().clear();
+
+        Button btnAvancerTemps = new Button("Avancer le Temps");
+        btnAvancerTemps.setOnAction(e -> {
+            afficherRapportDansStatsPane(hopital.avancerTemps(1));
+            afficherHopital();
+        });
+        sectionButtons.getChildren().add(btnAvancerTemps);
+        GridPane grille = new GridPane();
+        grille.setHgap(10);
+        grille.setVgap(10);
+        ArrayList<Button> boutons = new ArrayList<>();
+
+        for (ServiceMedical service : hopital.getServices()) {
+            Button btnMeute = new Button(service.getNom());
+            btnMeute.setStyle("-fx-font-size: 16px; -fx-padding: 10;");
+            btnMeute.setOnAction(e -> {
+                FXGL.getNotificationService().pushNotification("Service sélectionnée : " + service.getNom());
+                afficherPopUpService(service);
+            });
+            boutons.add(btnMeute);
+        }
+        Button btnRetour = new Button("Retour");
+        btnRetour.setStyle("-fx-font-size: 16px; -fx-padding: 10;");
+        btnRetour.setOnAction(e -> sectionButtons.getChildren().clear());
+        ajouterBoutonsDansGrille(boutons, grille, 5, btnRetour);
+        ScrollPane scroll = new ScrollPane(grille);
+        scroll.setFitToWidth(true);
+        scroll.setPrefHeight(sectionButtons.getPrefHeight());
+        sectionButtons.getChildren().add(scroll);
+
 
     }
 

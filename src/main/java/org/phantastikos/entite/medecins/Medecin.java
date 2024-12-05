@@ -5,6 +5,8 @@ import org.phantastikos.entite.creatures.Creature;
 import org.phantastikos.structures.hopital.services.Budget;
 import org.phantastikos.structures.hopital.services.ServiceMedical;
 
+import java.util.Map;
+
 public class Medecin {
     private final String nom;
     private final String sexe;
@@ -16,13 +18,12 @@ public class Medecin {
         this.age = age;
     }
 
-    public void examiner(ServiceMedical service) {
-        System.out.println("Examen du service : " + service.getNom());
-        service.afficherDetails();
+    public Map<String, String> examiner(ServiceMedical service) {
+        return service.recupererAttributs();
     }
 
     public void soigner(ServiceMedical service) {
-        System.out.println(nom + " soigne les créatures du service : " + service.getNom());
+        service.soignerCreatures();
     }
 
     public void reviserBudget(ServiceMedical service) {

@@ -1,5 +1,7 @@
 package org.phantastikos.entite.etats.maladies;
 
+import java.util.Random;
+
 /**
  * Enumération représentant les différents types de maladies possibles.
  * Chaque type de maladie est associé à un nom complet, un nom abrégé et un niveau maximum
@@ -60,5 +62,11 @@ public enum TypeMaladie {
      */
     public int getNiveauMax() {
         return niveauMax;
+    }
+
+    public static TypeMaladie getAleatoire() {
+        TypeMaladie[] maladies = values(); // Récupère tous les types de maladie
+        Random random = new Random();
+        return maladies[random.nextInt(maladies.length)]; // Sélectionne une maladie aléatoire
     }
 }
